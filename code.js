@@ -1,9 +1,33 @@
+var angle = 0;
+var color = 255;
+
+
+var slider;
 function setup() {
-  createCanvas(400,400);
+  canvas = createCanvas(400,400);
+  slider = createSlider(0 , TWO_PI, PI/4, 0.001);
 }
 
 function draw() {
-  background(205);
-  fill(255, 0, 100);
-  rect(200,200,50,60);
+  background(51);
+  angle = slider.value();
+  stroke(255);
+  translate(200, height);
+  branch(100);
+}
+
+function branch(len) {
+  //stroke(random(255),random(255),random(255));
+  line(0, 0, 0, -len);
+  translate(0, -len);
+  if (len > 4) {
+    push();
+    rotate(angle);
+    branch(len*0.67 + 0.7);
+    pop();
+    push();
+    rotate(-angle);
+    branch(len * 0.67 + 0.7);
+    pop();
+  }
 }
